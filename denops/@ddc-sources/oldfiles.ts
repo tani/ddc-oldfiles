@@ -46,7 +46,10 @@ export class Source extends BaseSource<Params, UserData> {
     args: GatherCandidatesArguments<Params>,
   ): Promise<Candidate<UserData>[]> {
     const files = await vars.v.get(args.denops, "oldfiles", [] as string[]);
-    return files.map((word) => ({ word }));
+    return files.map((file) => ({
+      word: file.replace(' ', "\\ "),
+      abbr: file
+    }));
   }
   params(): Params {
     return {};
